@@ -1,0 +1,79 @@
+# ------------------------------
+# OS cruft
+.DS_Store
+Thumbs.db
+Icon?
+Desktop.ini
+
+
+# IntelliJ
+.idea/
+*.iml
+out/
+
+# Eclipse / STS
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Swap files
+*.swp
+*.swo
+
+# ------------------------------
+# Logs & temp
+*.log
+logs/
+spring.log
+*.pid
+*.tmp
+tmp/
+temp/
+hs_err_pid*
+replay_pid*
+*.hprof
+
+# ------------------------------
+# Java / Maven (backend)
+target/
+surefire-reports/
+failsafe-reports/
+
+# ------------------------------
+# Node / Angular (frontend)
+node_modules/
+dist/
+dist-ssr/
+.angular/
+.angular-cache/
+out-tsc/
+coverage/
+
+# Package manager caches
+.npm/
+.pnpm-store/
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# TypeScript build info
+*.tsbuildinfo
+
+# ------------------------------
+# Environment files
+.env
+.env.*
+!.env.example
