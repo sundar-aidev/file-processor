@@ -1,0 +1,86 @@
+<main class="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+  <section class="w-full max-w-xl">
+    <div class="bg-white shadow-xl rounded-2xl p-6">
+      <header class="mb-6">
+        <h1 class="text-2xl font-semibold text-gray-800">File Processor</h1>
+        <p class="text-sm text-gray-500 mt-1">
+          Upload a
+          <code class="px-1 py-0.5 rounded bg-gray-100">.txt</code>
+          or
+          <code class="px-1 py-0.5 rounded bg-gray-100">.csv</code>
+          file to count lines & words.
+        </p>
+      </header>
+
+      <div class="flex flex-col gap-3">
+        <input
+          type="file"
+          accept=".txt,.csv"
+          class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4
+                 file:rounded-lg file:border-0 file:text-sm file:font-semibold
+                 file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+          (change)="onFileSelected($event)"
+        />
+
+        <div class="flex items-center gap-3">
+          <button class="btn-primary" [disabled]="!canUpload()" (click)="upload()">Upload</button>
+
+          @if (isUploading()) {
+            <div class="flex items-center gap-2 text-blue-700">
+              <svg class="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a 8 8 0 0 1 8-8v4a4 4 0 0 0-4 4H4z"></path>
+              </svg>
+              Uploading...
+            </div>
+          }
+        </div>
+      </div>
+
+      @if (response()) {
+        <div class="mt-6 border border-green-200 bg-green-50 rounded-xl p-4">
+          <h2 class="font-semibold text-green-900 mb-2">Upload Successful</h2>
+          <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+            <div>
+              <dt class="dt">File ID</dt>
+              <dd class="dd font-mono break-all">{{ response()!.id }}</dd>
+            </div>
+            <div>
+              <dt class="dt">Filename</dt>
+              <dd class="dd">{{ response()!.filename }}</dd>
+            </div>
+            <div>
+              <dt class="dt">Line Count</dt>
+              <dd class="dd">{{ response()!.lines }}</dd>
+            </div>
+            <div>
+              <dt class="dt">Word Count</dt>
+              <dd class="dd">{{ response()!.words }}</dd>
+            </div>
+          </dl>
+
+          <details class="mt-3">
+            <summary class="cursor-pointer text-sm text-green-800/80 hover:text-green-900">
+              Show raw JSON
+            </summary>
+            <pre class="mt-2 text-xs bg-white rounded-lg p-3 overflow-auto border border-green-200">
+{{ response() | json }}
+            </pre>
+          </details>
+        </div>
+      }
+
+      @if (errorMsg()) {
+        <div class="mt-6 border border-red-200 bg-red-50 text-red-800 rounded-xl p-4">
+          <h2 class="font-semibold mb-1">Upload Failed</h2>
+          <p class="text-sm">{{ errorMsg() }}</p>
+        </div>
+      }
+
+      <footer class="mt-6 text-xs text-gray-500">
+        Backend endpoint:
+        <span class="font-mono">{{ apiUrl }}</span>
+      </footer>
+    </div>
+  </section>
+</main>

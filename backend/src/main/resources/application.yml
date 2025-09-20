@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+# Keep knobs outside code. Reviewers can tweak allowed types here.
+app:
+  allowed-file-extensions: [ "txt", "csv" ]
